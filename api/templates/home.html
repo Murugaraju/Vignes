@@ -1,0 +1,30 @@
+{% load static%}
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div align="center">
+
+                <h1>Welcome</h1>
+
+                <input type="text" id="myText">
+                <button onclick="doSearch()">Search</button>
+                <p id="dt"></p>
+
+
+
+        </div>
+        <script src="{% static 'axio.js' %}"></script>
+        <script>
+        function doSearch(){
+           axios.get('http://'+window.location.host+'/word/search?word='+document.getElementById("myText").value)
+           .then((response)=>{
+            data=(response.data.length==0)?'NoData':JSON.stringify(response.data)   
+            
+            document.getElementById("dt").innerHTML=data
+        })
+        }
+        </script>
+    </body>
+</html>
